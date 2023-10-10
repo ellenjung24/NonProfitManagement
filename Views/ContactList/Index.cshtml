@@ -1,0 +1,45 @@
+@page
+@model NonProfitManagement.Views.ContactList.Index
+@* @model List<ContactList> *@
+@* @{
+    ViewData["Title"] = "Index";
+} *@
+
+@* <h1>@ViewData["Title"]</h1> *@
+
+<p>
+    @* <a asp-page="Create">Create New</a> *@
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>AccountNo</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Street</th>
+            <th>City</th>
+            <th>Postalcode</th>
+            <th>Country</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ContactList) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.AccountNo)</td>
+        <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+        <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+        <td>@Html.DisplayFor(modelItem => item.Street)</td>
+        <td>@Html.DisplayFor(modelItem => item.City)</td>
+        <td>@Html.DisplayFor(modelItem => item.PostalCode)</td>
+        <td>@Html.DisplayFor(modelItem => item.Country)</td>
+        <td>
+            @* <a asp-page="./Edit" asp-route-itemid="@item.AccountNo">Edit</a>
+            <a asp-page="./Details" asp-route-itemid="@item.AccountNo">Details</a>
+            <a asp-page="./Delete" asp-route-itemid="@item.AccountNo">Delete</a> *@
+        </td>
+    </tr>
+}
+    </tbody>
+</table>
