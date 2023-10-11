@@ -10,87 +10,87 @@ using NonProfitManagement.Models;
 
 namespace NonProfitManagement.Controllers
 {
-    public class ContactListController : Controller
+    public class PaymentMethodController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ContactListController(ApplicationDbContext context)
+        public PaymentMethodController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: ContactList
+        // GET: PaymentMethod
         public async Task<IActionResult> Index()
         {
-              return _context.ContactLists != null ? 
-                          View(await _context.ContactLists.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.ContactLists'  is null.");
+              return _context.PaymentMethods != null ? 
+                          View(await _context.PaymentMethods.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.PaymentMethods'  is null.");
         }
 
-        // GET: ContactList/Details/5
+        // GET: PaymentMethod/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.ContactLists == null)
+            if (id == null || _context.PaymentMethods == null)
             {
                 return NotFound();
             }
 
-            var contactList = await _context.ContactLists
-                .FirstOrDefaultAsync(m => m.AccountNo == id);
-            if (contactList == null)
+            var paymentMethod = await _context.PaymentMethods
+                .FirstOrDefaultAsync(m => m.PaymentMethodId == id);
+            if (paymentMethod == null)
             {
                 return NotFound();
             }
 
-            return View(contactList);
+            return View(paymentMethod);
         }
 
-        // GET: ContactList/Create
+        // GET: PaymentMethod/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ContactList/Create
+        // POST: PaymentMethod/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AccountNo,FirstName,LastName,Email,Street,City,PostalCode,Country")] ContactList contactList)
+        public async Task<IActionResult> Create([Bind("PaymentMethodId,Name")] PaymentMethod paymentMethod)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(contactList);
+                _context.Add(paymentMethod);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(contactList);
+            return View(paymentMethod);
         }
 
-        // GET: ContactList/Edit/5
+        // GET: PaymentMethod/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.ContactLists == null)
+            if (id == null || _context.PaymentMethods == null)
             {
                 return NotFound();
             }
 
-            var contactList = await _context.ContactLists.FindAsync(id);
-            if (contactList == null)
+            var paymentMethod = await _context.PaymentMethods.FindAsync(id);
+            if (paymentMethod == null)
             {
                 return NotFound();
             }
-            return View(contactList);
+            return View(paymentMethod);
         }
 
-        // POST: ContactList/Edit/5
+        // POST: PaymentMethod/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AccountNo,FirstName,LastName,Email,Street,City,PostalCode,Country")] ContactList contactList)
+        public async Task<IActionResult> Edit(int id, [Bind("PaymentMethodId,Name")] PaymentMethod paymentMethod)
         {
-            if (id != contactList.AccountNo)
+            if (id != paymentMethod.PaymentMethodId)
             {
                 return NotFound();
             }
@@ -99,12 +99,12 @@ namespace NonProfitManagement.Controllers
             {
                 try
                 {
-                    _context.Update(contactList);
+                    _context.Update(paymentMethod);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ContactListExists(contactList.AccountNo))
+                    if (!PaymentMethodExists(paymentMethod.PaymentMethodId))
                     {
                         return NotFound();
                     }
@@ -115,49 +115,49 @@ namespace NonProfitManagement.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(contactList);
+            return View(paymentMethod);
         }
 
-        // GET: ContactList/Delete/5
+        // GET: PaymentMethod/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.ContactLists == null)
+            if (id == null || _context.PaymentMethods == null)
             {
                 return NotFound();
             }
 
-            var contactList = await _context.ContactLists
-                .FirstOrDefaultAsync(m => m.AccountNo == id);
-            if (contactList == null)
+            var paymentMethod = await _context.PaymentMethods
+                .FirstOrDefaultAsync(m => m.PaymentMethodId == id);
+            if (paymentMethod == null)
             {
                 return NotFound();
             }
 
-            return View(contactList);
+            return View(paymentMethod);
         }
 
-        // POST: ContactList/Delete/5
+        // POST: PaymentMethod/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.ContactLists == null)
+            if (_context.PaymentMethods == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.ContactLists'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.PaymentMethods'  is null.");
             }
-            var contactList = await _context.ContactLists.FindAsync(id);
-            if (contactList != null)
+            var paymentMethod = await _context.PaymentMethods.FindAsync(id);
+            if (paymentMethod != null)
             {
-                _context.ContactLists.Remove(contactList);
+                _context.PaymentMethods.Remove(paymentMethod);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ContactListExists(int id)
+        private bool PaymentMethodExists(int id)
         {
-          return (_context.ContactLists?.Any(e => e.AccountNo == id)).GetValueOrDefault();
+          return (_context.PaymentMethods?.Any(e => e.PaymentMethodId == id)).GetValueOrDefault();
         }
     }
 }

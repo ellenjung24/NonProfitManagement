@@ -11,14 +11,14 @@ using NonProfitManagement.Data;
 namespace NonProfitManagement.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231010081655_M1")]
+    [Migration("20231011041017_M1")]
     partial class M1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.12");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -48,19 +48,19 @@ namespace NonProfitManagement.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0d10f32f-3009-4acb-9232-4bafb0c3c99c",
+                            Id = "c79a57df-bcb7-46e7-ad3f-09a2b7eeaf30",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "1fbbc5a3-7c54-4c65-9338-8ed627010cc9",
+                            Id = "4f6ec7a2-935d-4aa5-940e-5a4200b1b39d",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
-                            Id = "8ea3dd0e-26f4-4966-8ebc-0b0a565023db",
+                            Id = "4a98018e-bace-4415-8d96-29bd51e8bc5c",
                             Name = "Finance",
                             NormalizedName = "FINANCE"
                         });
@@ -155,49 +155,49 @@ namespace NonProfitManagement.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "20b82265-ea47-4a04-82b6-985a7c6e20eb",
+                            Id = "e76e9acf-3aa3-4d88-bf98-3bc73a869014",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9cf4fc86-7558-44f6-986f-1684ed7a035a",
+                            ConcurrencyStamp = "efa5e77e-d4b5-43ce-a6f3-2743a02e35e6",
                             Email = "a@a.a",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "A@A.A",
                             NormalizedUserName = "A@A.A",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJ74o/WF3sOw0dsmdw+zkGrCL5rwl2GjVsgOVo4SZveiUTCdqMDIaN+6RoxJCRNKoQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJaCqk/2OBbk1UqZ7Sri0oBh6EUS5cQqsRzob91fYqN7SORYb45enyECvKQN2Ji17w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "81a7aecb-84cd-4e39-9250-637bc5a4faa0",
+                            SecurityStamp = "77284024-9007-4884-a056-00c5fde2820a",
                             TwoFactorEnabled = false,
                             UserName = "a@a.a"
                         },
                         new
                         {
-                            Id = "4eceff74-3f2c-4e1c-9612-33cb3791dc88",
+                            Id = "abe3f468-fcef-494c-a5cf-262ff4b32d37",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0806d155-3d12-4024-855c-7fce176d98ec",
+                            ConcurrencyStamp = "464274b2-695a-4d3f-a046-109dbe8e1741",
                             Email = "m@m.m",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "M@M.M",
                             NormalizedUserName = "M@M.M",
-                            PasswordHash = "AQAAAAIAAYagAAAAECQ9N5qwbvMX+yEUYCoTcPPi/XSdtpQjk32c4cQ0PCma6s7WHKtjjURCLrzMxKzH5w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHpAZCEmuf871CiRI72fu9h8g3FWhnJEovzgciXjcWqtXpEJ6uwOSPgTL8VETUdatw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "abfc30af-4ddc-41d2-8e4d-56f4ddd4b087",
+                            SecurityStamp = "a1ceec9d-b3ce-43c6-8616-f675f4459b88",
                             TwoFactorEnabled = false,
                             UserName = "m@m.m"
                         },
                         new
                         {
-                            Id = "511239d3-6d30-4156-b96a-f96e46d80256",
+                            Id = "8f88c158-50f7-4e3e-aca4-13d8527de488",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b575fbb7-5117-4351-ba4f-1b64e778ea65",
+                            ConcurrencyStamp = "f674c79a-3a53-4f2d-94ef-3c2e86bb8366",
                             Email = "f@f.f",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "F@F.F",
                             NormalizedUserName = "F@F.F",
-                            PasswordHash = "AQAAAAIAAYagAAAAENfZ5Qi/C55BmIaMxySdZZ5sIpfTfvrxh82oceRpwwr4VSDChoFEjTj+5OfB0ng0IQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENAHdUnMxhaw4NpAa1DQxs/Vrt9LD0najW4/fFMv8k9d5RBhjdjGOxewlX7zfvc7kA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eb06280f-1b76-42e8-8c08-4f8b4e558160",
+                            SecurityStamp = "24583d21-bd66-4da1-a2ca-21fbcb0bb7b8",
                             TwoFactorEnabled = false,
                             UserName = "f@f.f"
                         });
@@ -267,18 +267,18 @@ namespace NonProfitManagement.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "20b82265-ea47-4a04-82b6-985a7c6e20eb",
-                            RoleId = "0d10f32f-3009-4acb-9232-4bafb0c3c99c"
+                            UserId = "e76e9acf-3aa3-4d88-bf98-3bc73a869014",
+                            RoleId = "c79a57df-bcb7-46e7-ad3f-09a2b7eeaf30"
                         },
                         new
                         {
-                            UserId = "4eceff74-3f2c-4e1c-9612-33cb3791dc88",
-                            RoleId = "1fbbc5a3-7c54-4c65-9338-8ed627010cc9"
+                            UserId = "abe3f468-fcef-494c-a5cf-262ff4b32d37",
+                            RoleId = "4f6ec7a2-935d-4aa5-940e-5a4200b1b39d"
                         },
                         new
                         {
-                            UserId = "511239d3-6d30-4156-b96a-f96e46d80256",
-                            RoleId = "8ea3dd0e-26f4-4966-8ebc-0b0a565023db"
+                            UserId = "8f88c158-50f7-4e3e-aca4-13d8527de488",
+                            RoleId = "4a98018e-bace-4415-8d96-29bd51e8bc5c"
                         });
                 });
 
@@ -410,7 +410,7 @@ namespace NonProfitManagement.Data.Migrations
                             TransId = 1,
                             AccountNo = 24,
                             Amount = 500f,
-                            Date = new DateTime(2023, 10, 10, 1, 16, 54, 947, DateTimeKind.Local).AddTicks(6749),
+                            Date = new DateTime(2023, 10, 10, 21, 10, 17, 648, DateTimeKind.Local).AddTicks(9730),
                             Notes = "Donated monthly",
                             PaymentMethodId = 1,
                             TransactionTypeId = 1
@@ -420,7 +420,7 @@ namespace NonProfitManagement.Data.Migrations
                             TransId = 2,
                             AccountNo = 17,
                             Amount = 1000f,
-                            Date = new DateTime(2023, 10, 10, 1, 16, 54, 947, DateTimeKind.Local).AddTicks(6875),
+                            Date = new DateTime(2023, 10, 10, 21, 10, 17, 648, DateTimeKind.Local).AddTicks(9808),
                             Notes = "Donated for homeless people",
                             PaymentMethodId = 2,
                             TransactionTypeId = 2
@@ -430,7 +430,7 @@ namespace NonProfitManagement.Data.Migrations
                             TransId = 3,
                             AccountNo = 12,
                             Amount = 750f,
-                            Date = new DateTime(2023, 10, 10, 1, 16, 54, 947, DateTimeKind.Local).AddTicks(6880),
+                            Date = new DateTime(2023, 10, 10, 21, 10, 17, 648, DateTimeKind.Local).AddTicks(9812),
                             Notes = "Donators want a new gym",
                             PaymentMethodId = 2,
                             TransactionTypeId = 3

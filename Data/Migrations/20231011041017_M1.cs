@@ -242,9 +242,9 @@ namespace NonProfitManagement.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "0d10f32f-3009-4acb-9232-4bafb0c3c99c", null, "Admin", "ADMIN" },
-                    { "1fbbc5a3-7c54-4c65-9338-8ed627010cc9", null, "Member", "MEMBER" },
-                    { "8ea3dd0e-26f4-4966-8ebc-0b0a565023db", null, "Finance", "FINANCE" }
+                    { "4a98018e-bace-4415-8d96-29bd51e8bc5c", null, "Finance", "FINANCE" },
+                    { "4f6ec7a2-935d-4aa5-940e-5a4200b1b39d", null, "Member", "MEMBER" },
+                    { "c79a57df-bcb7-46e7-ad3f-09a2b7eeaf30", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -252,9 +252,9 @@ namespace NonProfitManagement.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "20b82265-ea47-4a04-82b6-985a7c6e20eb", 0, "9cf4fc86-7558-44f6-986f-1684ed7a035a", "a@a.a", true, false, null, "A@A.A", "A@A.A", "AQAAAAIAAYagAAAAEJ74o/WF3sOw0dsmdw+zkGrCL5rwl2GjVsgOVo4SZveiUTCdqMDIaN+6RoxJCRNKoQ==", null, false, "81a7aecb-84cd-4e39-9250-637bc5a4faa0", false, "a@a.a" },
-                    { "4eceff74-3f2c-4e1c-9612-33cb3791dc88", 0, "0806d155-3d12-4024-855c-7fce176d98ec", "m@m.m", true, false, null, "M@M.M", "M@M.M", "AQAAAAIAAYagAAAAECQ9N5qwbvMX+yEUYCoTcPPi/XSdtpQjk32c4cQ0PCma6s7WHKtjjURCLrzMxKzH5w==", null, false, "abfc30af-4ddc-41d2-8e4d-56f4ddd4b087", false, "m@m.m" },
-                    { "511239d3-6d30-4156-b96a-f96e46d80256", 0, "b575fbb7-5117-4351-ba4f-1b64e778ea65", "f@f.f", true, false, null, "F@F.F", "F@F.F", "AQAAAAIAAYagAAAAENfZ5Qi/C55BmIaMxySdZZ5sIpfTfvrxh82oceRpwwr4VSDChoFEjTj+5OfB0ng0IQ==", null, false, "eb06280f-1b76-42e8-8c08-4f8b4e558160", false, "f@f.f" }
+                    { "8f88c158-50f7-4e3e-aca4-13d8527de488", 0, "f674c79a-3a53-4f2d-94ef-3c2e86bb8366", "f@f.f", true, false, null, "F@F.F", "F@F.F", "AQAAAAIAAYagAAAAENAHdUnMxhaw4NpAa1DQxs/Vrt9LD0najW4/fFMv8k9d5RBhjdjGOxewlX7zfvc7kA==", null, false, "24583d21-bd66-4da1-a2ca-21fbcb0bb7b8", false, "f@f.f" },
+                    { "abe3f468-fcef-494c-a5cf-262ff4b32d37", 0, "464274b2-695a-4d3f-a046-109dbe8e1741", "m@m.m", true, false, null, "M@M.M", "M@M.M", "AQAAAAIAAYagAAAAEHpAZCEmuf871CiRI72fu9h8g3FWhnJEovzgciXjcWqtXpEJ6uwOSPgTL8VETUdatw==", null, false, "a1ceec9d-b3ce-43c6-8616-f675f4459b88", false, "m@m.m" },
+                    { "e76e9acf-3aa3-4d88-bf98-3bc73a869014", 0, "efa5e77e-d4b5-43ce-a6f3-2743a02e35e6", "a@a.a", true, false, null, "A@A.A", "A@A.A", "AQAAAAIAAYagAAAAEJaCqk/2OBbk1UqZ7Sri0oBh6EUS5cQqsRzob91fYqN7SORYb45enyECvKQN2Ji17w==", null, false, "77284024-9007-4884-a056-00c5fde2820a", false, "a@a.a" }
                 });
 
             migrationBuilder.InsertData(
@@ -292,9 +292,9 @@ namespace NonProfitManagement.Data.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "0d10f32f-3009-4acb-9232-4bafb0c3c99c", "20b82265-ea47-4a04-82b6-985a7c6e20eb" },
-                    { "1fbbc5a3-7c54-4c65-9338-8ed627010cc9", "4eceff74-3f2c-4e1c-9612-33cb3791dc88" },
-                    { "8ea3dd0e-26f4-4966-8ebc-0b0a565023db", "511239d3-6d30-4156-b96a-f96e46d80256" }
+                    { "4a98018e-bace-4415-8d96-29bd51e8bc5c", "8f88c158-50f7-4e3e-aca4-13d8527de488" },
+                    { "4f6ec7a2-935d-4aa5-940e-5a4200b1b39d", "abe3f468-fcef-494c-a5cf-262ff4b32d37" },
+                    { "c79a57df-bcb7-46e7-ad3f-09a2b7eeaf30", "e76e9acf-3aa3-4d88-bf98-3bc73a869014" }
                 });
 
             migrationBuilder.InsertData(
@@ -302,9 +302,9 @@ namespace NonProfitManagement.Data.Migrations
                 columns: new[] { "TransId", "AccountNo", "Amount", "Date", "Notes", "PaymentMethodId", "TransactionTypeId" },
                 values: new object[,]
                 {
-                    { 1, 24, 500f, new DateTime(2023, 10, 10, 1, 16, 54, 947, DateTimeKind.Local).AddTicks(6749), "Donated monthly", 1, 1 },
-                    { 2, 17, 1000f, new DateTime(2023, 10, 10, 1, 16, 54, 947, DateTimeKind.Local).AddTicks(6875), "Donated for homeless people", 2, 2 },
-                    { 3, 12, 750f, new DateTime(2023, 10, 10, 1, 16, 54, 947, DateTimeKind.Local).AddTicks(6880), "Donators want a new gym", 2, 3 }
+                    { 1, 24, 500f, new DateTime(2023, 10, 10, 21, 10, 17, 648, DateTimeKind.Local).AddTicks(9730), "Donated monthly", 1, 1 },
+                    { 2, 17, 1000f, new DateTime(2023, 10, 10, 21, 10, 17, 648, DateTimeKind.Local).AddTicks(9808), "Donated for homeless people", 2, 2 },
+                    { 3, 12, 750f, new DateTime(2023, 10, 10, 21, 10, 17, 648, DateTimeKind.Local).AddTicks(9812), "Donators want a new gym", 2, 3 }
                 });
 
             migrationBuilder.CreateIndex(
