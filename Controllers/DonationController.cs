@@ -52,11 +52,11 @@ namespace NonProfitManagement.Controllers
         [Authorize (Roles = "Admin, Finance")]
         public IActionResult Create()
         {
-            ViewData["AccountNo"] = new SelectList(_context.ContactLists, "AccountNo", "AccountNo");
-            ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethods, "PaymentMethodId", "PaymentMethodId");
-            ViewData["PaymentMethodName"] = new SelectList(_context.PaymentMethods, "Name", "Name");
-            ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeId");
-            ViewData["TransactionTypeName"] = new SelectList(_context.TransactionTypes, "Name", "Name");
+            ViewData["AccountNo"] = new SelectList(_context.ContactLists, "AccountNo", "Email");
+            ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethods, "PaymentMethodId", "Name");
+            // ViewData["PaymentMethodName"] = new SelectList(_context.PaymentMethods, "Name", "Name");
+            ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "Name");
+            // ViewData["TransactionTypeName"] = new SelectList(_context.TransactionTypes, "Name", "Name");
             return View();
         }
 

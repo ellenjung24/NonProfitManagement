@@ -12,15 +12,18 @@ namespace NonProfitManagement.Models
         [Key]
         public int TransId { get; set; }
         public DateTime? Date { get; set; }
+        [Display(Name = "Account Email")]
         public int? AccountNo { get; set; }
-        [Display(Name = "Account Number")]
+        [Display(Name = "Account Email")]
         [ForeignKey("AccountNo")]
         public ContactList? ContactList { get; set; }
+        [Display(Name = "Transaction Type")]
         public int? TransactionTypeId { get; set; }
         [Display(Name = "Transaction Type")]
         [ForeignKey("TransactionTypeId")]
         public TransactionType? TransactionType { get; set; }
         public float? Amount { get; set; }
+        [Display(Name = "Payment Method")]
         public int? PaymentMethodId { get; set; }
         [Display(Name = "Payment Method")]
         [ForeignKey("PaymentMethodId")]
