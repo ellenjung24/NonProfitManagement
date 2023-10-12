@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -68,6 +69,9 @@ namespace NonProfitManagement.Controllers
         [Authorize (Roles = "Admin, Finance")]
         public async Task<IActionResult> Create([Bind("TransId,Date,AccountNo,TransactionTypeId,Amount,PaymentMethodId,Notes")] Donation donation)
         {
+            if (donation.Date == null) {
+                
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(donation);
