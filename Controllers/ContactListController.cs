@@ -57,7 +57,8 @@ namespace NonProfitManagement.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult ShowError() {
+        public IActionResult ShowError()
+        {
             return View();
         }
 
@@ -190,7 +191,8 @@ namespace NonProfitManagement.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Receipt(int? id)
         {
-            try {
+            try
+            {
                 if (id == null || _context.ContactLists == null)
                 {
                     return NotFound();
@@ -201,7 +203,20 @@ namespace NonProfitManagement.Controllers
                 var user = await _context.ContactLists
                     .FirstOrDefaultAsync(m => m.AccountNo == id);
                 var donationList = await _context.Donations
-                    .Where(m => m.AccountNo == id && m.Date.Value.Year == currentYear).ToListAsync();
+                .Where(m => m.AccountNo == id).ToListAsync();
+
+                var groupedDonations = donationList
+                .GroupBy(d => d.Date.Value.Year)
+                .Select(g => new
+                {
+                    Year = g.Key,
+                    Donations = g.ToList(),
+                    TotalAmount = g.Sum(donation => donation.Amount)
+                })
+                .OrderByDescending(g => g.Year);
+
+
+                // .Where(m => m.AccountNo == id && m.Date.Value.Year == currentYear).ToListAsync();
                 if (donationList == null)
                 {
                     Console.WriteLine("donationList is null");
@@ -221,9 +236,11 @@ namespace NonProfitManagement.Controllers
                 }
                 ViewBag.totalAmount = total;
 
-                return View(donationList);
+                return View(groupedDonations);
 
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 // return View('ShowError');
                 return RedirectToAction(nameof(ShowError));
             }

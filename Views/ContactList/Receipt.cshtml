@@ -1,7 +1,7 @@
-@model IEnumerable<NonProfitManagement.Models.Donation>
+@* @model IEnumerable<NonProfitManagement.Models.Donation>
 
 @{
-    ViewData["Title"] = "Print Receipt";
+ViewData["Title"] = "Print Receipt";
 }
 
 <h1>Print Receipt</h1>
@@ -14,22 +14,64 @@
 
 
 <table class="table">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Date)</th>
-            <th>@Html.DisplayNameFor(model => model.Amount)</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model) {
+<thead>
+<tr>
+<th>@Html.DisplayNameFor(model => model.Date)</th>
+<th>@Html.DisplayNameFor(model => model.Amount)</th>
+</tr>
+</thead>
+<tbody>
+@foreach (var item in Model) {
+<tr>
+<td>@Html.DisplayFor(modelItem => item.Date)</td>
+<td>@Html.DisplayFor(modelItem => item.Amount)</td>
+</tr>
+}
+<tr>
+<td></td>
+<td><b>Total: @String.Format("{0:C}", @ViewBag.totalAmount)</b></td>
+</tr>
+</tbody>
+</table> *@
+
+
+@model IEnumerable<dynamic>
+<h1>Print Receipt</h1>
+<br> <br>
+
+<p style="font-size: 30px;"><b>Name: @ViewBag.userName</b></p>
+<hr>
+@* <p style="font-size: 21px;">Date: December 31, @ViewBag.thisYear</p>
+<p style="font-size: 21px;">Donations Paid during @ViewBag.thisYear</p> *@
+
+
+@foreach (var donationGroup in Model)
+{
+    <h2>@donationGroup.Year</h2> 
+
+    @* <h2>@donationGroup.Key Donations</h2> <!-- This will print the year --> *@
+
+     <table class="table">
+        <thead>
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Date)</td>
-                <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                <th>Date</th>
+                <th>Amount</th>
+                <!-- Add other columns as needed -->
             </tr>
-        }
-        <tr>
-            <td></td>
-            <td><b>Total: @String.Format("{0:C}", @ViewBag.totalAmount)</b></td>
-        </tr>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var donation in donationGroup.Donations)
+            {
+                <tr>
+                    <td>@donation.Date.ToShortDateString()</td>
+                    <td>@String.Format("{0:C}", @donation.Amount)</td>
+                </tr>
+                
+            }
+            <tr>
+                <td></td>
+                <td><b>Total: @String.Format("{0:C}", @donationGroup.TotalAmount)</b></td>
+            </tr>
+        </tbody>
+    </table>
+}

@@ -240,5 +240,53 @@ namespace NonProfitManagement.Controllers
 
             return View(donations);
         }
+
+
+        [Authorize(Roles = "Admin, Finance")]
+        public async Task<IActionResult> YearlyReport() {
+            // var donationList = await _context.Donations
+            //     .Where(m => m.Date.Value.Year == DateTime.Now.Year).ToListAsync();
+            var donationList = await _context.Donations.ToListAsync();
+            if (donationList == null)
+            {
+                return NotFound();
+            }
+
+
+              var groupedDonations = donationList
+                .GroupBy(d => d.Date.Value.Year)
+                .Select(g => new
+                {
+                    Year = g.Key,
+                    Donations = g.ToList(),
+                    TotalAmount = g.Sum(donation => donation.Amount)
+                })
+                .OrderByDescending(g => g.Year);
+
+
+                // .Where(m => m.AccountNo == id && m.Date.Value.Year == currentYear).ToListAsync();
+                if (donationList == null)
+                {
+                    Console.WriteLine("donationList is null");
+                    return NotFound();
+                }
+            float? total = 0;
+            // List<String> nameList = new List<String>();
+            foreach (Donation item in donationList)
+            {
+                total += item.Amount;
+            }
+            ViewBag.ytdTotal = total;
+            ViewBag.today = DateTime.Now.ToString("yyyy-MM-dd");
+            ViewBag.thisYear = DateTime.Now.Year;
+            // ViewBag.nameList = nameList;
+            // return View(donationList);
+
+          
+
+            return View(groupedDonations);
+        }
+
+      
     }
 }

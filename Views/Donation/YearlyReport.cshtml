@@ -1,0 +1,41 @@
+@* 
+@model IEnumerable<dynamic>
+<h1>Yearly Report</h1>
+<br> <br>
+
+<p style="font-size: 30px;"><b>Year: @ViewBag.Year</b></p>
+<hr>
+@* <p style="font-size: 21px;">Date: December 31, @ViewBag.thisYear</p>
+<p style="font-size: 21px;">Donations Paid during @ViewBag.thisYear</p> *@
+
+
+@foreach (var donationGroup in Model)
+{
+    <h2>@donationGroup.Year</h2> 
+
+    @* <h2>@donationGroup.Key Donations</h2> <!-- This will print the year --> *@
+
+     <table class="table">
+        <thead>
+            <tr>
+
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @* @foreach (var donation in donationGroup.Donations)
+            {
+                <tr>
+                    <td>@donation.Date.ToShortDateString()</td>
+                    <td>@String.Format("{0:C}", @donation.Amount)</td>
+                </tr>
+                
+            } *@
+            <tr>
+                <td><b>Total: @String.Format("{0:C}", @donationGroup.TotalAmount)</b></td>
+            </tr>
+        </tbody>
+
+    </table>
+}
+
