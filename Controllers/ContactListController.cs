@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.EntityFrameworkCore;
 using NonProfitManagement.Data;
 using NonProfitManagement.Models;
@@ -24,9 +25,9 @@ namespace NonProfitManagement.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
-              return _context.ContactLists != null ? 
-                          View(await _context.ContactLists.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.ContactLists'  is null.");
+            return _context.ContactLists != null ?
+                        View(await _context.ContactLists.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.ContactLists'  is null.");
         }
 
         // GET: ContactList/Details/5
@@ -52,6 +53,11 @@ namespace NonProfitManagement.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult ShowError() {
             return View();
         }
 
@@ -112,7 +118,7 @@ namespace NonProfitManagement.Controllers
                     return NotFound();
                 }
                 try
-                {   
+                {
                     contactList.Created = contactListDb.Created;
                     contactList.CreatedBy = contactListDb.CreatedBy;
                     contactList.Modified = DateTime.Now;
@@ -170,14 +176,58 @@ namespace NonProfitManagement.Controllers
             {
                 _context.ContactLists.Remove(contactList);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin")]
         private bool ContactListExists(int id)
         {
-          return (_context.ContactLists?.Any(e => e.AccountNo == id)).GetValueOrDefault();
+            return (_context.ContactLists?.Any(e => e.AccountNo == id)).GetValueOrDefault();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Receipt(int? id)
+        {
+            try {
+                if (id == null || _context.ContactLists == null)
+                {
+                    return NotFound();
+                }
+                // View(await _context.ContactLists.ToListAsync())
+
+                var currentYear = DateTime.Now.Year;
+                var user = await _context.ContactLists
+                    .FirstOrDefaultAsync(m => m.AccountNo == id);
+                var donationList = await _context.Donations
+                    .Where(m => m.AccountNo == id && m.Date.Value.Year == currentYear).ToListAsync();
+                if (donationList == null)
+                {
+                    Console.WriteLine("donationList is null");
+                    return NotFound();
+                }
+                ViewBag.userName = user.FirstName + " " + user.LastName;
+                if (donationList[0].Date != null)
+                {
+                    ViewBag.thisYear = donationList[0].Date.Value.Year;
+                }
+                // ViewBag.thisYear = donationList[0].Date.
+
+                float? total = 0;
+                foreach (Donation item in donationList)
+                {
+                    total += item.Amount;
+                }
+                ViewBag.totalAmount = total;
+
+                return View(donationList);
+
+            } catch (Exception ex) {
+                // return View('ShowError');
+                return RedirectToAction(nameof(ShowError));
+            }
+
         }
     }
 }

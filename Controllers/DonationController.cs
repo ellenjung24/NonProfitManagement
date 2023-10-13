@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using NonProfitManagement.Data;
 using NonProfitManagement.Models;
@@ -195,6 +196,49 @@ namespace NonProfitManagement.Controllers
         private bool DonationExists(int id)
         {
           return (_context.Donations?.Any(e => e.TransId == id)).GetValueOrDefault();
+        }
+
+        [Authorize(Roles = "Admin, Finance")]
+        public async Task<IActionResult> YtdReport() {
+            var donationList = await _context.Donations
+                .Where(m => m.Date.Value.Year == DateTime.Now.Year).ToListAsync();
+            if (donationList == null)
+            {
+                return NotFound();
+            }
+            float? total = 0;
+            // List<String> nameList = new List<String>();
+            foreach (Donation item in donationList)
+            {
+                total += item.Amount;
+            }
+            ViewBag.ytdTotal = total;
+            ViewBag.today = DateTime.Now.ToString("yyyy-MM-dd");
+            ViewBag.thisYear = DateTime.Now.Year;
+            // ViewBag.nameList = nameList;
+            // return View(donationList);
+
+            var currentYear = DateTime.Now.Year;
+            var startDate = new DateTime(currentYear, 1, 1);
+            var endDate = DateTime.Now;
+
+            var donations = await _context.Donations
+                .Include(d => d.ContactList)
+                .Where(d => d.Date >= startDate && d.Date <= endDate)
+                .GroupBy(d => new { d.ContactList.FirstName, d.ContactList.LastName })
+                .Select(g => new              {
+                    FirstName = g.Key.FirstName,
+                    LastName = g.Key.LastName,
+                    TotalAmount = g.Sum(d => d.Amount)
+                })
+                .ToListAsync();
+
+            if (donations == null || !donations.Any())
+            {
+                return NotFound();
+            }
+
+            return View(donations);
         }
     }
 }

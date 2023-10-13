@@ -1,0 +1,30 @@
+@model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = "YTD Report";
+}
+
+<h1>YTD Report</h1>
+<br><br>
+<p style="font-size: 21px;">Date: @ViewBag.thisYear-01-01 until @ViewBag.today</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>@item.FirstName @item.LastName</td>
+                <td>@String.Format("{0:C}", item.TotalAmount)</td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td><b>Total: $@String.Format("{0:C}", @ViewBag.ytdTotal)</b></td>
+        </tr>
+    </tbody>
+</table>

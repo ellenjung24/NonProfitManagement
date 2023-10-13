@@ -1,0 +1,35 @@
+@model IEnumerable<NonProfitManagement.Models.Donation>
+
+@{
+    ViewData["Title"] = "Print Receipt";
+}
+
+<h1>Print Receipt</h1>
+<br> <br>
+
+<p style="font-size: 30px;"><b>Name: @ViewBag.userName</b></p>
+<hr>
+<p style="font-size: 21px;">Date: December 31, @ViewBag.thisYear</p>
+<p style="font-size: 21px;">Donations Paid during @ViewBag.thisYear</p>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Date)</th>
+            <th>@Html.DisplayNameFor(model => model.Amount)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td><b>Total: @String.Format("{0:C}", @ViewBag.totalAmount)</b></td>
+        </tr>
+    </tbody>
+</table>
