@@ -21,6 +21,7 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: PaymentMethod
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
               return _context.PaymentMethods != null ? 
@@ -29,6 +30,7 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: PaymentMethod/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.PaymentMethods == null)
@@ -47,7 +49,7 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: PaymentMethod/Create
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -58,11 +60,13 @@ namespace NonProfitManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("PaymentMethodId,Name")] PaymentMethod paymentMethod)
         {
             if (ModelState.IsValid)
             {
+                paymentMethod.Created = DateTime.Now;
+                paymentMethod.CreatedBy = User.Identity.Name;
                 _context.Add(paymentMethod);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -71,7 +75,7 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: PaymentMethod/Edit/5
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.PaymentMethods == null)
@@ -92,7 +96,7 @@ namespace NonProfitManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("PaymentMethodId,Name")] PaymentMethod paymentMethod)
         {
             if (id != paymentMethod.PaymentMethodId)
@@ -102,8 +106,17 @@ namespace NonProfitManagement.Controllers
 
             if (ModelState.IsValid)
             {
+                var paymentMethodToUpdate = await _context.PaymentMethods.FirstOrDefaultAsync(s => s.PaymentMethodId == id);
+                if (paymentMethodToUpdate == null)
+                {
+                    return NotFound();
+                }
                 try
                 {
+                    paymentMethod.Created = paymentMethodToUpdate.Created;
+                    paymentMethod.CreatedBy = paymentMethodToUpdate.CreatedBy;
+                    paymentMethod.Modified = DateTime.Now;
+                    paymentMethod.ModifiedBy = User.Identity.Name;
                     _context.Update(paymentMethod);
                     await _context.SaveChangesAsync();
                 }
@@ -124,7 +137,7 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: PaymentMethod/Delete/5
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.PaymentMethods == null)
@@ -145,7 +158,7 @@ namespace NonProfitManagement.Controllers
         // POST: PaymentMethod/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.PaymentMethods == null)

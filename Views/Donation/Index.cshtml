@@ -40,16 +40,16 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ContactList.AccountNo)
+                @Html.DisplayFor(modelItem => item.ContactList.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TransactionType.TransactionTypeId)
+                @Html.DisplayFor(modelItem => item.TransactionType.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Amount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PaymentMethod.PaymentMethodId)
+                @Html.DisplayFor(modelItem => item.PaymentMethod.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Notes)

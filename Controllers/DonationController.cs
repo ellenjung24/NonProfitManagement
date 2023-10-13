@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +21,7 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: Donation
+        [Authorize(Roles = "Admin, Finance")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Donations.Include(d => d.ContactList).Include(d => d.PaymentMethod).Include(d => d.TransactionType);
@@ -29,6 +29,7 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: Donation/Details/5
+        [Authorize(Roles = "Admin, Finance")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Donations == null)
@@ -50,14 +51,12 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: Donation/Create
-        [Authorize (Roles = "Admin, Finance")]
+        [Authorize(Roles = "Admin, Finance")]
         public IActionResult Create()
         {
             ViewData["AccountNo"] = new SelectList(_context.ContactLists, "AccountNo", "Email");
             ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethods, "PaymentMethodId", "Name");
-            // ViewData["PaymentMethodName"] = new SelectList(_context.PaymentMethods, "Name", "Name");
             ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "Name");
-            // ViewData["TransactionTypeName"] = new SelectList(_context.TransactionTypes, "Name", "Name");
             return View();
         }
 
@@ -66,26 +65,25 @@ namespace NonProfitManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize (Roles = "Admin, Finance")]
+        [Authorize(Roles = "Admin, Finance")]
         public async Task<IActionResult> Create([Bind("TransId,Date,AccountNo,TransactionTypeId,Amount,PaymentMethodId,Notes")] Donation donation)
         {
-            if (donation.Date == null) {
-                
-            }
             if (ModelState.IsValid)
             {
+                donation.Created = DateTime.Now;
+                donation.CreatedBy = User.Identity.Name;
                 _context.Add(donation);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AccountNo"] = new SelectList(_context.ContactLists, "AccountNo", "AccountNo", donation.AccountNo);
-            ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethods, "PaymentMethodId", "PaymentMethodId", donation.PaymentMethodId);
-            ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeId", donation.TransactionTypeId);
+            ViewData["AccountNo"] = new SelectList(_context.ContactLists, "AccountNo", "City", donation.AccountNo);
+            ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethods, "PaymentMethodId", "Name", donation.PaymentMethodId);
+            ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "Description", donation.TransactionTypeId);
             return View(donation);
         }
 
         // GET: Donation/Edit/5
-        [Authorize (Roles = "Admin, Finance")]
+        [Authorize(Roles = "Admin, Finance")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Donations == null)
@@ -98,9 +96,9 @@ namespace NonProfitManagement.Controllers
             {
                 return NotFound();
             }
-            ViewData["AccountNo"] = new SelectList(_context.ContactLists, "AccountNo", "AccountNo", donation.AccountNo);
-            ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethods, "PaymentMethodId", "PaymentMethodId", donation.PaymentMethodId);
-            ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeId", donation.TransactionTypeId);
+            ViewData["AccountNo"] = new SelectList(_context.ContactLists, "AccountNo", "City", donation.AccountNo);
+            ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethods, "PaymentMethodId", "Name", donation.PaymentMethodId);
+            ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "Description", donation.TransactionTypeId);
             return View(donation);
         }
 
@@ -109,7 +107,7 @@ namespace NonProfitManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize (Roles = "Admin, Finance")]
+        [Authorize(Roles = "Admin, Finance")]
         public async Task<IActionResult> Edit(int id, [Bind("TransId,Date,AccountNo,TransactionTypeId,Amount,PaymentMethodId,Notes")] Donation donation)
         {
             if (id != donation.TransId)
@@ -119,8 +117,17 @@ namespace NonProfitManagement.Controllers
 
             if (ModelState.IsValid)
             {
+                var originalDonation = await _context.Donations.AsNoTracking().FirstOrDefaultAsync(d => d.TransId == id);
+                if (originalDonation == null)
+                {
+                    return NotFound();
+                }
                 try
                 {
+                    donation.Created = originalDonation.Created;
+                    donation.CreatedBy = originalDonation.CreatedBy;
+                    donation.Modified = DateTime.Now;
+                    donation.ModifiedBy = User.Identity.Name;
                     _context.Update(donation);
                     await _context.SaveChangesAsync();
                 }
@@ -137,14 +144,14 @@ namespace NonProfitManagement.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AccountNo"] = new SelectList(_context.ContactLists, "AccountNo", "AccountNo", donation.AccountNo);
-            ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethods, "PaymentMethodId", "PaymentMethodId", donation.PaymentMethodId);
-            ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeId", donation.TransactionTypeId);
+            ViewData["AccountNo"] = new SelectList(_context.ContactLists, "AccountNo", "City", donation.AccountNo);
+            ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethods, "PaymentMethodId", "Name", donation.PaymentMethodId);
+            ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "Description", donation.TransactionTypeId);
             return View(donation);
         }
 
         // GET: Donation/Delete/5
-        [Authorize (Roles = "Admin, Finance")]
+        [Authorize(Roles = "Admin, Finance")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Donations == null)
@@ -168,7 +175,7 @@ namespace NonProfitManagement.Controllers
         // POST: Donation/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize (Roles = "Admin, Finance")]
+        [Authorize(Roles = "Admin, Finance")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Donations == null)

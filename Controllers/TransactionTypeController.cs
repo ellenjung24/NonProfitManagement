@@ -21,6 +21,7 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: TransactionType
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
               return _context.TransactionTypes != null ? 
@@ -29,6 +30,7 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: TransactionType/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.TransactionTypes == null)
@@ -47,7 +49,7 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: TransactionType/Create
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -58,11 +60,13 @@ namespace NonProfitManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("TransactionTypeId,Name,Description")] TransactionType transactionType)
         {
             if (ModelState.IsValid)
             {
+                transactionType.Created = DateTime.Now;
+                transactionType.CreatedBy = User.Identity.Name;
                 _context.Add(transactionType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -71,7 +75,7 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: TransactionType/Edit/5
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.TransactionTypes == null)
@@ -92,7 +96,7 @@ namespace NonProfitManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("TransactionTypeId,Name,Description")] TransactionType transactionType)
         {
             if (id != transactionType.TransactionTypeId)
@@ -102,8 +106,17 @@ namespace NonProfitManagement.Controllers
 
             if (ModelState.IsValid)
             {
+                 var transactionTypeToUpdate = await _context.TransactionTypes.FirstOrDefaultAsync(s => s.TransactionTypeId == id);
+                if (transactionTypeToUpdate == null)
+                {
+                    return NotFound();
+                } 
                 try
                 {
+                    transactionType.Created = transactionTypeToUpdate.Created;
+                    transactionType.CreatedBy = transactionTypeToUpdate.CreatedBy;
+                    transactionType.Modified = DateTime.Now;
+                    transactionType.ModifiedBy = User.Identity.Name;
                     _context.Update(transactionType);
                     await _context.SaveChangesAsync();
                 }
@@ -124,7 +137,7 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: TransactionType/Delete/5
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.TransactionTypes == null)
@@ -145,7 +158,7 @@ namespace NonProfitManagement.Controllers
         // POST: TransactionType/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.TransactionTypes == null)

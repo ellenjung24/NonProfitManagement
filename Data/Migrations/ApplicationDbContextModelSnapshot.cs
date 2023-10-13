@@ -45,19 +45,19 @@ namespace NonProfitManagement.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c79a57df-bcb7-46e7-ad3f-09a2b7eeaf30",
+                            Id = "38abcb15-50ae-4ce8-9fab-cb74922a3b1c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "4f6ec7a2-935d-4aa5-940e-5a4200b1b39d",
+                            Id = "fec35d8f-f25d-4a02-9189-6a6f72f88271",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
-                            Id = "4a98018e-bace-4415-8d96-29bd51e8bc5c",
+                            Id = "1e3e7e54-be73-455b-8c03-692ef1e0c95e",
                             Name = "Finance",
                             NormalizedName = "FINANCE"
                         });
@@ -152,49 +152,49 @@ namespace NonProfitManagement.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e76e9acf-3aa3-4d88-bf98-3bc73a869014",
+                            Id = "daaad9e3-7a29-4456-ac81-40a06929acce",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "efa5e77e-d4b5-43ce-a6f3-2743a02e35e6",
+                            ConcurrencyStamp = "1024c327-91a4-49a9-82a5-7c1982e0f064",
                             Email = "a@a.a",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "A@A.A",
                             NormalizedUserName = "A@A.A",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJaCqk/2OBbk1UqZ7Sri0oBh6EUS5cQqsRzob91fYqN7SORYb45enyECvKQN2Ji17w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKNdXDgZhkA8MpeNvm8XkehOSk2N0z3tlERNQJza9oQYK4KkOtLpkK8z7j/uVyz6tQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "77284024-9007-4884-a056-00c5fde2820a",
+                            SecurityStamp = "9e072299-2f3a-45a9-ac3c-17a9f83bffc1",
                             TwoFactorEnabled = false,
                             UserName = "a@a.a"
                         },
                         new
                         {
-                            Id = "abe3f468-fcef-494c-a5cf-262ff4b32d37",
+                            Id = "2b8124f3-43f7-45f2-9d2a-00e20aba851a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "464274b2-695a-4d3f-a046-109dbe8e1741",
+                            ConcurrencyStamp = "4f951041-dab7-49e6-8bdf-f5447c92b632",
                             Email = "m@m.m",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "M@M.M",
                             NormalizedUserName = "M@M.M",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHpAZCEmuf871CiRI72fu9h8g3FWhnJEovzgciXjcWqtXpEJ6uwOSPgTL8VETUdatw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKXDD7+hZuwr111ry0YEpeKDauMDbob+NqQkpK61nTKX06s2pdcXp+G2rM/9plkr+w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a1ceec9d-b3ce-43c6-8616-f675f4459b88",
+                            SecurityStamp = "09093e63-b017-4454-9736-9c36ea3ce730",
                             TwoFactorEnabled = false,
                             UserName = "m@m.m"
                         },
                         new
                         {
-                            Id = "8f88c158-50f7-4e3e-aca4-13d8527de488",
+                            Id = "3a15f40b-e36f-4593-9dac-1b4080b95b97",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f674c79a-3a53-4f2d-94ef-3c2e86bb8366",
+                            ConcurrencyStamp = "298331d2-830e-451e-ae7a-d20b8a4cc4a9",
                             Email = "f@f.f",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "F@F.F",
                             NormalizedUserName = "F@F.F",
-                            PasswordHash = "AQAAAAIAAYagAAAAENAHdUnMxhaw4NpAa1DQxs/Vrt9LD0najW4/fFMv8k9d5RBhjdjGOxewlX7zfvc7kA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFiFDxDktGs8TPg4j6DvwEhuMo4hCVMZn2TDz92o04/vthAES2hc9xreGSZG6Evx1g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "24583d21-bd66-4da1-a2ca-21fbcb0bb7b8",
+                            SecurityStamp = "f9a0e0bc-45aa-4625-b319-ac13b4612286",
                             TwoFactorEnabled = false,
                             UserName = "f@f.f"
                         });
@@ -264,18 +264,18 @@ namespace NonProfitManagement.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "e76e9acf-3aa3-4d88-bf98-3bc73a869014",
-                            RoleId = "c79a57df-bcb7-46e7-ad3f-09a2b7eeaf30"
+                            UserId = "daaad9e3-7a29-4456-ac81-40a06929acce",
+                            RoleId = "38abcb15-50ae-4ce8-9fab-cb74922a3b1c"
                         },
                         new
                         {
-                            UserId = "abe3f468-fcef-494c-a5cf-262ff4b32d37",
-                            RoleId = "4f6ec7a2-935d-4aa5-940e-5a4200b1b39d"
+                            UserId = "2b8124f3-43f7-45f2-9d2a-00e20aba851a",
+                            RoleId = "fec35d8f-f25d-4a02-9189-6a6f72f88271"
                         },
                         new
                         {
-                            UserId = "8f88c158-50f7-4e3e-aca4-13d8527de488",
-                            RoleId = "4a98018e-bace-4415-8d96-29bd51e8bc5c"
+                            UserId = "3a15f40b-e36f-4593-9dac-1b4080b95b97",
+                            RoleId = "1e3e7e54-be73-455b-8c03-692ef1e0c95e"
                         });
                 });
 
@@ -307,24 +307,43 @@ namespace NonProfitManagement.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("Modified")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ModifiedBy")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PostalCode")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Street")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("AccountNo");
@@ -377,9 +396,23 @@ namespace NonProfitManagement.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<float?>("Amount")
+                        .IsRequired()
                         .HasColumnType("REAL");
 
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime?>("Date")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("Modified")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ModifiedBy")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Notes")
@@ -407,7 +440,7 @@ namespace NonProfitManagement.Data.Migrations
                             TransId = 1,
                             AccountNo = 24,
                             Amount = 500f,
-                            Date = new DateTime(2023, 10, 10, 21, 10, 17, 648, DateTimeKind.Local).AddTicks(9730),
+                            Date = new DateTime(2023, 10, 12, 15, 2, 28, 404, DateTimeKind.Local).AddTicks(5405),
                             Notes = "Donated monthly",
                             PaymentMethodId = 1,
                             TransactionTypeId = 1
@@ -417,7 +450,7 @@ namespace NonProfitManagement.Data.Migrations
                             TransId = 2,
                             AccountNo = 17,
                             Amount = 1000f,
-                            Date = new DateTime(2023, 10, 10, 21, 10, 17, 648, DateTimeKind.Local).AddTicks(9808),
+                            Date = new DateTime(2023, 10, 12, 15, 2, 28, 404, DateTimeKind.Local).AddTicks(5469),
                             Notes = "Donated for homeless people",
                             PaymentMethodId = 2,
                             TransactionTypeId = 2
@@ -427,7 +460,7 @@ namespace NonProfitManagement.Data.Migrations
                             TransId = 3,
                             AccountNo = 12,
                             Amount = 750f,
-                            Date = new DateTime(2023, 10, 10, 21, 10, 17, 648, DateTimeKind.Local).AddTicks(9812),
+                            Date = new DateTime(2023, 10, 12, 15, 2, 28, 404, DateTimeKind.Local).AddTicks(5472),
                             Notes = "Donators want a new gym",
                             PaymentMethodId = 2,
                             TransactionTypeId = 3
@@ -440,7 +473,20 @@ namespace NonProfitManagement.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("Modified")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("PaymentMethodId");
@@ -471,10 +517,24 @@ namespace NonProfitManagement.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("Modified")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ModifiedBy")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("TransactionTypeId");

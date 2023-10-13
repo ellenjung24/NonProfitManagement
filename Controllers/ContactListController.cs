@@ -21,6 +21,7 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: ContactList
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
               return _context.ContactLists != null ? 
@@ -29,6 +30,7 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: ContactList/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.ContactLists == null)
@@ -47,7 +49,7 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: ContactList/Create
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -58,11 +60,13 @@ namespace NonProfitManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("AccountNo,FirstName,LastName,Email,Street,City,PostalCode,Country")] ContactList contactList)
         {
             if (ModelState.IsValid)
             {
+                contactList.CreatedBy = User.Identity.Name;
+                contactList.Created = DateTime.Now;
                 _context.Add(contactList);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -71,7 +75,7 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: ContactList/Edit/5
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ContactLists == null)
@@ -92,7 +96,7 @@ namespace NonProfitManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("AccountNo,FirstName,LastName,Email,Street,City,PostalCode,Country")] ContactList contactList)
         {
             if (id != contactList.AccountNo)
@@ -102,8 +106,17 @@ namespace NonProfitManagement.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                var contactListDb = await _context.ContactLists.AsNoTracking().FirstOrDefaultAsync(m => m.AccountNo == id);
+                if (contactListDb == null)
                 {
+                    return NotFound();
+                }
+                try
+                {   
+                    contactList.Created = contactListDb.Created;
+                    contactList.CreatedBy = contactListDb.CreatedBy;
+                    contactList.Modified = DateTime.Now;
+                    contactList.ModifiedBy = User.Identity.Name;
                     _context.Update(contactList);
                     await _context.SaveChangesAsync();
                 }
@@ -124,7 +137,7 @@ namespace NonProfitManagement.Controllers
         }
 
         // GET: ContactList/Delete/5
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.ContactLists == null)
@@ -145,7 +158,7 @@ namespace NonProfitManagement.Controllers
         // POST: ContactList/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.ContactLists == null)

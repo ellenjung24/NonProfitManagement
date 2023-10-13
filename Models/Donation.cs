@@ -11,6 +11,7 @@ namespace NonProfitManagement.Models
     {
         [Key]
         public int TransId { get; set; }
+        [Required]
         public DateTime? Date { get; set; }
         [Display(Name = "Account Email")]
         public int? AccountNo { get; set; }
@@ -22,6 +23,8 @@ namespace NonProfitManagement.Models
         [Display(Name = "Transaction Type")]
         [ForeignKey("TransactionTypeId")]
         public TransactionType? TransactionType { get; set; }
+        [Required]
+        [DisplayFormat(DataFormatString = "{0:C2}")]
         public float? Amount { get; set; }
         [Display(Name = "Payment Method")]
         public int? PaymentMethodId { get; set; }
@@ -29,6 +32,20 @@ namespace NonProfitManagement.Models
         [ForeignKey("PaymentMethodId")]
         public PaymentMethod? PaymentMethod { get; set; }
         public string? Notes { get; set; }
+
+        //internal update
+
+        [ScaffoldColumn(false)]
+        public DateTime? Created { get; set; }
+
+        [ScaffoldColumn(false)]
+        public DateTime? Modified { get; set; }
+
+        [ScaffoldColumn(false)]
+        public string? CreatedBy { get; set; }
+
+        [ScaffoldColumn(false)]
+        public string? ModifiedBy { get; set; }
 
     }
 }

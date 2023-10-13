@@ -58,13 +58,17 @@ namespace NonProfitManagement.Data.Migrations
                 {
                     AccountNo = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    FirstName = table.Column<string>(type: "TEXT", nullable: true),
-                    LastName = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    Street = table.Column<string>(type: "TEXT", nullable: true),
-                    City = table.Column<string>(type: "TEXT", nullable: true),
-                    PostalCode = table.Column<string>(type: "TEXT", nullable: true),
-                    Country = table.Column<string>(type: "TEXT", nullable: true)
+                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
+                    LastName = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    Street = table.Column<string>(type: "TEXT", nullable: false),
+                    City = table.Column<string>(type: "TEXT", nullable: false),
+                    PostalCode = table.Column<string>(type: "TEXT", nullable: false),
+                    Country = table.Column<string>(type: "TEXT", nullable: false),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Modified = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -77,7 +81,11 @@ namespace NonProfitManagement.Data.Migrations
                 {
                     PaymentMethodId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: true)
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Modified = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -90,8 +98,12 @@ namespace NonProfitManagement.Data.Migrations
                 {
                     TransactionTypeId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
-                    Description = table.Column<string>(type: "TEXT", nullable: true)
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Modified = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -210,12 +222,16 @@ namespace NonProfitManagement.Data.Migrations
                 {
                     TransId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Date = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
                     AccountNo = table.Column<int>(type: "INTEGER", nullable: true),
                     TransactionTypeId = table.Column<int>(type: "INTEGER", nullable: true),
-                    Amount = table.Column<float>(type: "REAL", nullable: true),
+                    Amount = table.Column<float>(type: "REAL", nullable: false),
                     PaymentMethodId = table.Column<int>(type: "INTEGER", nullable: true),
-                    Notes = table.Column<string>(type: "TEXT", nullable: true)
+                    Notes = table.Column<string>(type: "TEXT", nullable: true),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Modified = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -242,9 +258,9 @@ namespace NonProfitManagement.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "4a98018e-bace-4415-8d96-29bd51e8bc5c", null, "Finance", "FINANCE" },
-                    { "4f6ec7a2-935d-4aa5-940e-5a4200b1b39d", null, "Member", "MEMBER" },
-                    { "c79a57df-bcb7-46e7-ad3f-09a2b7eeaf30", null, "Admin", "ADMIN" }
+                    { "1e3e7e54-be73-455b-8c03-692ef1e0c95e", null, "Finance", "FINANCE" },
+                    { "38abcb15-50ae-4ce8-9fab-cb74922a3b1c", null, "Admin", "ADMIN" },
+                    { "fec35d8f-f25d-4a02-9189-6a6f72f88271", null, "Member", "MEMBER" }
                 });
 
             migrationBuilder.InsertData(
@@ -252,39 +268,39 @@ namespace NonProfitManagement.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "8f88c158-50f7-4e3e-aca4-13d8527de488", 0, "f674c79a-3a53-4f2d-94ef-3c2e86bb8366", "f@f.f", true, false, null, "F@F.F", "F@F.F", "AQAAAAIAAYagAAAAENAHdUnMxhaw4NpAa1DQxs/Vrt9LD0najW4/fFMv8k9d5RBhjdjGOxewlX7zfvc7kA==", null, false, "24583d21-bd66-4da1-a2ca-21fbcb0bb7b8", false, "f@f.f" },
-                    { "abe3f468-fcef-494c-a5cf-262ff4b32d37", 0, "464274b2-695a-4d3f-a046-109dbe8e1741", "m@m.m", true, false, null, "M@M.M", "M@M.M", "AQAAAAIAAYagAAAAEHpAZCEmuf871CiRI72fu9h8g3FWhnJEovzgciXjcWqtXpEJ6uwOSPgTL8VETUdatw==", null, false, "a1ceec9d-b3ce-43c6-8616-f675f4459b88", false, "m@m.m" },
-                    { "e76e9acf-3aa3-4d88-bf98-3bc73a869014", 0, "efa5e77e-d4b5-43ce-a6f3-2743a02e35e6", "a@a.a", true, false, null, "A@A.A", "A@A.A", "AQAAAAIAAYagAAAAEJaCqk/2OBbk1UqZ7Sri0oBh6EUS5cQqsRzob91fYqN7SORYb45enyECvKQN2Ji17w==", null, false, "77284024-9007-4884-a056-00c5fde2820a", false, "a@a.a" }
+                    { "2b8124f3-43f7-45f2-9d2a-00e20aba851a", 0, "4f951041-dab7-49e6-8bdf-f5447c92b632", "m@m.m", true, false, null, "M@M.M", "M@M.M", "AQAAAAIAAYagAAAAEKXDD7+hZuwr111ry0YEpeKDauMDbob+NqQkpK61nTKX06s2pdcXp+G2rM/9plkr+w==", null, false, "09093e63-b017-4454-9736-9c36ea3ce730", false, "m@m.m" },
+                    { "3a15f40b-e36f-4593-9dac-1b4080b95b97", 0, "298331d2-830e-451e-ae7a-d20b8a4cc4a9", "f@f.f", true, false, null, "F@F.F", "F@F.F", "AQAAAAIAAYagAAAAEFiFDxDktGs8TPg4j6DvwEhuMo4hCVMZn2TDz92o04/vthAES2hc9xreGSZG6Evx1g==", null, false, "f9a0e0bc-45aa-4625-b319-ac13b4612286", false, "f@f.f" },
+                    { "daaad9e3-7a29-4456-ac81-40a06929acce", 0, "1024c327-91a4-49a9-82a5-7c1982e0f064", "a@a.a", true, false, null, "A@A.A", "A@A.A", "AQAAAAIAAYagAAAAEKNdXDgZhkA8MpeNvm8XkehOSk2N0z3tlERNQJza9oQYK4KkOtLpkK8z7j/uVyz6tQ==", null, false, "9e072299-2f3a-45a9-ac3c-17a9f83bffc1", false, "a@a.a" }
                 });
 
             migrationBuilder.InsertData(
                 table: "ContactList",
-                columns: new[] { "AccountNo", "City", "Country", "Email", "FirstName", "LastName", "PostalCode", "Street" },
+                columns: new[] { "AccountNo", "City", "Country", "Created", "CreatedBy", "Email", "FirstName", "LastName", "Modified", "ModifiedBy", "PostalCode", "Street" },
                 values: new object[,]
                 {
-                    { 12, "Richmond", "Canada", "sam@fox.com", "Sam", "Fox", "V4F 1M7", "457 Fox Avenue" },
-                    { 17, "Delta", "Canada", "ann@day.com", "Ann", "Day", "V6G 1M6", "231 River Road" },
-                    { 24, "Burnaby", "Canada", "ellie@smith.com", "Ellie", "Smith", "V7L 3J2", "314 12th Avenue" }
+                    { 12, "Richmond", "Canada", null, null, "sam@fox.com", "Sam", "Fox", null, null, "V4F 1M7", "457 Fox Avenue" },
+                    { 17, "Delta", "Canada", null, null, "ann@day.com", "Ann", "Day", null, null, "V6G 1M6", "231 River Road" },
+                    { 24, "Burnaby", "Canada", null, null, "ellie@smith.com", "Ellie", "Smith", null, null, "V7L 3J2", "314 12th Avenue" }
                 });
 
             migrationBuilder.InsertData(
                 table: "PaymentMethod",
-                columns: new[] { "PaymentMethodId", "Name" },
+                columns: new[] { "PaymentMethodId", "Created", "CreatedBy", "Modified", "ModifiedBy", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Direct Deposit" },
-                    { 2, "Paypal" },
-                    { 3, "Check" }
+                    { 1, null, null, null, null, "Direct Deposit" },
+                    { 2, null, null, null, null, "Paypal" },
+                    { 3, null, null, null, null, "Check" }
                 });
 
             migrationBuilder.InsertData(
                 table: "TransactionType",
-                columns: new[] { "TransactionTypeId", "Description", "Name" },
+                columns: new[] { "TransactionTypeId", "Created", "CreatedBy", "Description", "Modified", "ModifiedBy", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Donations made without any special purpose", "General Donation" },
-                    { 2, "Donations made for homeless people", "Food for homeless" },
-                    { 3, "Donations for the purpose of upgrading the gym", "Repair of Gym" }
+                    { 1, null, null, "Donations made without any special purpose", null, null, "General Donation" },
+                    { 2, null, null, "Donations made for homeless people", null, null, "Food for homeless" },
+                    { 3, null, null, "Donations for the purpose of upgrading the gym", null, null, "Repair of Gym" }
                 });
 
             migrationBuilder.InsertData(
@@ -292,19 +308,19 @@ namespace NonProfitManagement.Data.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "4a98018e-bace-4415-8d96-29bd51e8bc5c", "8f88c158-50f7-4e3e-aca4-13d8527de488" },
-                    { "4f6ec7a2-935d-4aa5-940e-5a4200b1b39d", "abe3f468-fcef-494c-a5cf-262ff4b32d37" },
-                    { "c79a57df-bcb7-46e7-ad3f-09a2b7eeaf30", "e76e9acf-3aa3-4d88-bf98-3bc73a869014" }
+                    { "fec35d8f-f25d-4a02-9189-6a6f72f88271", "2b8124f3-43f7-45f2-9d2a-00e20aba851a" },
+                    { "1e3e7e54-be73-455b-8c03-692ef1e0c95e", "3a15f40b-e36f-4593-9dac-1b4080b95b97" },
+                    { "38abcb15-50ae-4ce8-9fab-cb74922a3b1c", "daaad9e3-7a29-4456-ac81-40a06929acce" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Donation",
-                columns: new[] { "TransId", "AccountNo", "Amount", "Date", "Notes", "PaymentMethodId", "TransactionTypeId" },
+                columns: new[] { "TransId", "AccountNo", "Amount", "Created", "CreatedBy", "Date", "Modified", "ModifiedBy", "Notes", "PaymentMethodId", "TransactionTypeId" },
                 values: new object[,]
                 {
-                    { 1, 24, 500f, new DateTime(2023, 10, 10, 21, 10, 17, 648, DateTimeKind.Local).AddTicks(9730), "Donated monthly", 1, 1 },
-                    { 2, 17, 1000f, new DateTime(2023, 10, 10, 21, 10, 17, 648, DateTimeKind.Local).AddTicks(9808), "Donated for homeless people", 2, 2 },
-                    { 3, 12, 750f, new DateTime(2023, 10, 10, 21, 10, 17, 648, DateTimeKind.Local).AddTicks(9812), "Donators want a new gym", 2, 3 }
+                    { 1, 24, 500f, null, null, new DateTime(2023, 10, 12, 15, 2, 28, 404, DateTimeKind.Local).AddTicks(5405), null, null, "Donated monthly", 1, 1 },
+                    { 2, 17, 1000f, null, null, new DateTime(2023, 10, 12, 15, 2, 28, 404, DateTimeKind.Local).AddTicks(5469), null, null, "Donated for homeless people", 2, 2 },
+                    { 3, 12, 750f, null, null, new DateTime(2023, 10, 12, 15, 2, 28, 404, DateTimeKind.Local).AddTicks(5472), null, null, "Donators want a new gym", 2, 3 }
                 });
 
             migrationBuilder.CreateIndex(
