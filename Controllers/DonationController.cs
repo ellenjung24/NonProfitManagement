@@ -198,7 +198,7 @@ namespace NonProfitManagement.Controllers
           return (_context.Donations?.Any(e => e.TransId == id)).GetValueOrDefault();
         }
 
-        [Authorize(Roles = "Admin, Finance")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> YtdReport() {
             var donationList = await _context.Donations
                 .Where(m => m.Date.Value.Year == DateTime.Now.Year).ToListAsync();
@@ -242,7 +242,7 @@ namespace NonProfitManagement.Controllers
         }
 
 
-        [Authorize(Roles = "Admin, Finance")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> YearlyReport() {
             // var donationList = await _context.Donations
             //     .Where(m => m.Date.Value.Year == DateTime.Now.Year).ToListAsync();

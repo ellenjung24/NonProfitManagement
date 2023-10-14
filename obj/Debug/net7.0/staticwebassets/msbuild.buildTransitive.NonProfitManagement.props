@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="../buildMultiTargeting/NonProfitManagement.props" />
+  <Import Project="..\buildMultiTargeting\NonProfitManagement.props" />
 </Project>

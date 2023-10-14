@@ -11118,19 +11118,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/ellenjung/.nuget/packages/": {}
+    "C:\\Users\\dabee\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/ellenjung/Documents/COMP4976/Assignment1/NonProfitManagement/NonProfitManagement.csproj",
+      "projectUniqueName": "C:\\Users\\dabee\\term4\\COMP4976\\A1\\NonProfitManagement\\NonProfitManagement.csproj",
       "projectName": "NonProfitManagement",
-      "projectPath": "/Users/ellenjung/Documents/COMP4976/Assignment1/NonProfitManagement/NonProfitManagement.csproj",
-      "packagesPath": "/Users/ellenjung/.nuget/packages/",
-      "outputPath": "/Users/ellenjung/Documents/COMP4976/Assignment1/NonProfitManagement/obj/",
+      "projectPath": "C:\\Users\\dabee\\term4\\COMP4976\\A1\\NonProfitManagement\\NonProfitManagement.csproj",
+      "packagesPath": "C:\\Users\\dabee\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\dabee\\term4\\COMP4976\\A1\\NonProfitManagement\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/ellenjung/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\dabee\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -11208,7 +11208,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.402/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
